@@ -426,7 +426,7 @@ bool FlipWorldApp::saveChar(const char *path_name, const char *value, const char
     char file_path[256];
     snprintf(file_path, sizeof(file_path), STORAGE_EXT_PATH_PREFIX "/apps_data/%s/data/%s.txt", appId, path_name);
     storage_file_open(file, file_path, FSAM_WRITE, FSOM_CREATE_ALWAYS);
-    size_t data_size = strlen(value) + 1; // Include null terminator
+    size_t data_size = strlen(value);
     storage_file_write(file, value, data_size);
     storage_file_close(file);
     storage_file_free(file);
