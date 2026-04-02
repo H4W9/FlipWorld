@@ -7,6 +7,10 @@ static Color lcd_get_color(uint16_t color)
 {
     return (color == 0xFFFF) ? ColorWhite : ColorBlack;
 }
+static Color lcd_get_color(uint8_t color)
+{
+    return (color == 0xFF) ? ColorWhite : ColorBlack;
+}
 
 static void lcd_swap_float(float *a, float *b)
 {
