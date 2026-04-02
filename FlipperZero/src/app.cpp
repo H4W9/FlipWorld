@@ -523,6 +523,10 @@ void FlipWorldApp::viewPortDraw(Canvas *canvas, void *context)
 
 void FlipWorldApp::viewPortInput(InputEvent *event, void *context)
 {
+    if (event->type != InputTypeShort && event->type != InputTypeLong && event->type != InputTypeRepeat)
+    {
+        return;
+    }
     FlipWorldApp *app = static_cast<FlipWorldApp *>(context);
     furi_check(app);
     auto run = app->run.get();

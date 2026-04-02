@@ -20,7 +20,6 @@ private:
     //
     std::unique_ptr<Draw> draw;                      // Draw instance
     std::unique_ptr<GameEngine> engine;              // Engine instance
-    bool inputHeld = false;                          // Flag to check if input is held
     bool isGameRunning = false;                      // Flag to check if the game is running
     InputKey lastInput = InputKeyMAX;                // Last input key pressed
     QueuedMessage messageQueue[MAX_QUEUED_MESSAGES]; // Queue for websocket messages
@@ -31,7 +30,6 @@ private:
     bool shouldReturnToMenu = false;                 // Flag to signal return to menu
     //
     int atoi(const char *nptr) { return (int)strtol(nptr, NULL, 10); }          // convert string to integer
-    void debounceInput();                                                       // debounce input to prevent multiple actions from a single press
     void handleIncomingMultiplayerData(const char *message);                    // Handle incoming websocket messages (PvE mode only)
     void inputManager();                                                        // manage input for the game, called from updateInput
     void processCompleteMultiplayerMessage(const char *message);                // Process a complete multiplayer message

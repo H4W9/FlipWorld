@@ -178,16 +178,6 @@ void Player::drawCurrentView(Draw *canvas)
     if (!canvas)
         return;
 
-    // Update debounce timer
-    if (systemMenuDebounceTimer > 0.0f)
-    {
-        systemMenuDebounceTimer -= 1.0f / 120.f;
-        if (systemMenuDebounceTimer < 0.0f)
-        {
-            systemMenuDebounceTimer = 0.0f;
-        }
-    }
-
     switch (currentMainView)
     {
     case GameViewTitle:
@@ -201,13 +191,12 @@ void Player::drawCurrentView(Draw *canvas)
             {
                 // Handle system menu input first, before the game engine processes input
                 InputKey currentInput = flipWorldRun->getCurrentInput();
-                if (currentInput == InputKeyBack && systemMenuDebounceTimer <= 0.0f)
+                if (currentInput == InputKeyBack)
                 {
                     // Switch to system menu
                     currentMainView = GameViewSystemMenu;
-                    systemMenuDebounceTimer = 0.05f; // 50ms debounce
-                    flipWorldRun->resetInput();      // Reset input after handling
-                    return;                          // Don't process game input this frame
+                    flipWorldRun->resetInput(); // Reset input after handling
+                    return;                     // Don't process game input this frame
                 }
 
                 flipWorldRun->getEngine()->updateGameInput(currentInput);
@@ -248,32 +237,29 @@ void Player::drawCurrentView(Draw *canvas)
         // Handle system menu input
         {
             InputKey currentInput = flipWorldRun->getCurrentInput();
-            if (currentInput == InputKeyBack && systemMenuDebounceTimer <= 0.0f)
+            if (currentInput == InputKeyBack)
             {
-                currentMainView = GameViewGame;  // Switch back to game
-                systemMenuDebounceTimer = 0.05f; // 50ms debounce
-                flipWorldRun->resetInput();      // Reset input after handling
-                return;                          // Don't draw this frame
+                currentMainView = GameViewGame; // Switch back to game
+                flipWorldRun->resetInput();     // Reset input after handling
+                return;                         // Don't draw this frame
             }
-            else if (currentInput == InputKeyUp && systemMenuDebounceTimer <= 0.0f)
+            else if (currentInput == InputKeyUp)
             {
                 if (currentSystemMenuIndex > MenuIndexProfile)
                 {
                     currentSystemMenuIndex = static_cast<MenuIndex>(currentSystemMenuIndex - 1);
                 }
-                systemMenuDebounceTimer = 0.05f; // 50ms debounce
-                flipWorldRun->resetInput();      // Reset input after handling
+                flipWorldRun->resetInput(); // Reset input after handling
             }
-            else if (currentInput == InputKeyDown && systemMenuDebounceTimer <= 0.0f)
+            else if (currentInput == InputKeyDown)
             {
                 if (currentSystemMenuIndex < MenuIndexLeaveGame)
                 {
                     currentSystemMenuIndex = static_cast<MenuIndex>(currentSystemMenuIndex + 1);
                 }
-                systemMenuDebounceTimer = 0.05f; // 50ms debounce
-                flipWorldRun->resetInput();      // Reset input after handling
+                flipWorldRun->resetInput(); // Reset input after handling
             }
-            else if (currentInput == InputKeyOk && systemMenuDebounceTimer <= 0.0f)
+            else if (currentInput == InputKeyOk)
             {
                 if (currentSystemMenuIndex == MenuIndexLeaveGame)
                 {
@@ -285,8 +271,7 @@ void Player::drawCurrentView(Draw *canvas)
                     leaveGame = ToggleOn;
                     return;
                 }
-                systemMenuDebounceTimer = 0.3f; // 300ms debounce
-                flipWorldRun->resetInput();     // Reset input after handling
+                flipWorldRun->resetInput(); // Reset input after handling
             }
             else if (currentInput != InputKeyMAX)
             {
@@ -1379,16 +1364,6 @@ void Player::syncMultiplayerState()
 
 void Player::update(Game *game)
 {
-    // Update debounce timer
-    if (systemMenuDebounceTimer > 0.0f)
-    {
-        systemMenuDebounceTimer -= 1.0f / 120.f;
-        if (systemMenuDebounceTimer < 0.0f)
-        {
-            systemMenuDebounceTimer = 0.0f;
-        }
-    }
-
     if (currentMainView != GameViewGame)
     {
         // If not in game view, skip player updates
