@@ -2,9 +2,15 @@
 #include "run/sprites.hpp"
 #include "app.hpp"
 #include "jsmn/jsmn.h"
+#include "lcd.hpp"
 
-// this was hardcoded as 80 before, but FlipperHTTP v2.1 fixed this
-#define MAX_WEBSOCKET_SIZE 256
+#ifndef COLOR_WHITE
+#define COLOR_WHITE 0xFFFF
+#endif
+
+#ifndef COLOR_BLACK
+#define COLOR_BLACK 0x0000
+#endif
 
 FlipWorldRun::FlipWorldRun()
 {
@@ -81,21 +87,25 @@ bool FlipWorldRun::addRemotePlayer(const char *username)
     }
     strcpy(persistentUsername, username);
 
+    CallbackEntityDrawGame render_func = {};
+    render_func.fn = pveRender;
+    render_func.ctx = this;
+
     // Add new remote player entity
     Entity *remotePlayer = new Entity(
-        persistentUsername,         // name
-        ENTITY_PLAYER,              // type
-        Vector(384, 192),           // position
-        Vector(15, 11),             // size
-        player_left_sword_15x11px,  // sprite_data
-        player_left_sword_15x11px,  // sprite_left_data
-        player_right_sword_15x11px, // sprite_right_data
-        nullptr,                    // start
-        nullptr,                    // stop
-        nullptr,                    // update
-        pveRender,                  // render callback for PvE mode
-        nullptr,                    // collision callback
-        SPRITE_3D_NONE              // no 3D sprite for remote players
+        persistentUsername,                                          // name
+        ENTITY_PLAYER,                                               // type
+        Vector(384, 192),                                            // position
+        Vector(15, 11),                                              // size
+        new Image(Vector(15, 11), true, player_left_sword_15x11px),  // sprite_data
+        new Image(Vector(15, 11), true, player_left_sword_15x11px),  // sprite_left_data
+        new Image(Vector(15, 11), true, player_right_sword_15x11px), // sprite_right_data
+        nullptr,                                                     // start
+        nullptr,                                                     // stop
+        nullptr,                                                     // update
+        render_func,                                                 // render callback for PvE mode
+        nullptr,                                                     // collision callback
+        true                                                         // is 8-bit
     );
 
     if (remotePlayer)
@@ -1167,8 +1177,9 @@ void FlipWorldRun::processWebsocketQueue(FlipWorldApp *app)
     }
 }
 
-void FlipWorldRun::pveRender(Entity *entity, Draw *canvas, Game *game)
+void FlipWorldRun::pveRender(Entity *entity, Draw *canvas, Game *game, void *ctx)
 {
+    UNUSED(ctx);
     // Safety check for entity and name
     if (!entity || !entity->name || strlen(entity->name) == 0)
     {
@@ -1188,10 +1199,10 @@ void FlipWorldRun::pveRender(Entity *entity, Draw *canvas, Game *game)
     }
 
     // draw box around the name
-    canvas->fillRect(Vector(screen_x - (strlen(entity->name) * 2) - 1, screen_y - 7), Vector(strlen(entity->name) * 4 + 1, 8), ColorWhite);
+    canvas->fillRectangle(Vector(screen_x - (strlen(entity->name) * 2) - 1, screen_y - 7), Vector(strlen(entity->name) * 4 + 1, 8), COLOR_WHITE);
 
     // draw name over player's head
-    canvas->text(Vector(screen_x - (strlen(entity->name) * 2), screen_y - 2), entity->name, ColorBlack);
+    canvas->text(Vector(screen_x - (strlen(entity->name) * 2), screen_y - 2), entity->name, COLOR_BLACK);
 }
 
 bool FlipWorldRun::queueWebsocketMessage(const char *message)
@@ -1497,8 +1508,8 @@ bool FlipWorldRun::shouldUpdateEntity(Entity *entity) const
 
 bool FlipWorldRun::startGame()
 {
-    draw->fillScreen(ColorWhite);
-    draw->text(Vector(0, 10), "Initializing game...", ColorBlack);
+    draw->fillScreen(COLOR_WHITE);
+    draw->text(Vector(0, 10), "Initializing game...", COLOR_BLACK);
 
     if (isGameRunning || engine)
     {
@@ -1525,8 +1536,8 @@ bool FlipWorldRun::startGame()
         return false;
     }
 
-    draw->fillScreen(ColorWhite);
-    draw->text(Vector(0, 10), "Adding levels and player...", ColorBlack);
+    draw->fillScreen(COLOR_WHITE);
+    draw->text(Vector(0, 10), "Adding levels and player...", COLOR_BLACK);
 
     // add levels and player to the game
     std::unique_ptr<Level> level1 = getLevel(LevelHomeWoods, game.get());
@@ -1558,15 +1569,15 @@ bool FlipWorldRun::startGame()
         return false;
     }
 
-    draw->fillScreen(ColorWhite);
-    draw->setFontCustom(FONT_SIZE_SMALL);
+    draw->fillScreen(COLOR_WHITE);
+    draw->setFont(FONT_SIZE_SMALL);
     if (isPvEMode)
     {
-        draw->text(Vector(0, 10), "Starting multiplayer game...", ColorBlack);
+        draw->text(Vector(0, 10), "Starting multiplayer game...", COLOR_BLACK);
     }
     else
     {
-        draw->text(Vector(0, 10), "Starting single player game...", ColorBlack);
+        draw->text(Vector(0, 10), "Starting single player game...", COLOR_BLACK);
     }
 
     isGameRunning = true; // Set the flag to indicate game is running
@@ -1664,7 +1675,8 @@ void FlipWorldRun::updateDraw(Canvas *canvas)
     // set Draw instance
     if (!draw)
     {
-        draw = std::make_unique<Draw>(canvas);
+        lcd_init_canvas(canvas);
+        draw = std::make_unique<Draw>();
     }
 
     // Initialize player if not already done

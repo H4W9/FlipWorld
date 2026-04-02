@@ -30,15 +30,15 @@ private:
     size_t queueSize = 0;                            // Current size of the message queue
     bool shouldReturnToMenu = false;                 // Flag to signal return to menu
     //
-    int atoi(const char *nptr) { return (int)strtol(nptr, NULL, 10); } // convert string to integer
-    void debounceInput();                                              // debounce input to prevent multiple actions from a single press
-    void handleIncomingMultiplayerData(const char *message);           // Handle incoming websocket messages (PvE mode only)
-    void inputManager();                                               // manage input for the game, called from updateInput
-    void processCompleteMultiplayerMessage(const char *message);       // Process a complete multiplayer message
-    void processWebsocketQueue(FlipWorldApp *app);                     // Process queued websocket messages
-    bool queueWebsocketMessage(const char *message);                   // Queue a websocket message for sending
-    bool safeWebsocketSend(FlipWorldApp *app, const char *message);    // Send websocket message
-    static void pveRender(Entity *entity, Draw *canvas, Game *game);   // Callback for PvE entity
+    int atoi(const char *nptr) { return (int)strtol(nptr, NULL, 10); }          // convert string to integer
+    void debounceInput();                                                       // debounce input to prevent multiple actions from a single press
+    void handleIncomingMultiplayerData(const char *message);                    // Handle incoming websocket messages (PvE mode only)
+    void inputManager();                                                        // manage input for the game, called from updateInput
+    void processCompleteMultiplayerMessage(const char *message);                // Process a complete multiplayer message
+    void processWebsocketQueue(FlipWorldApp *app);                              // Process queued websocket messages
+    bool queueWebsocketMessage(const char *message);                            // Queue a websocket message for sending
+    bool safeWebsocketSend(FlipWorldApp *app, const char *message);             // Send websocket message
+    static void pveRender(Entity *entity, Draw *canvas, Game *game, void *ctx); // Callback for PvE entity
 public:
     FlipWorldRun();
     ~FlipWorldRun();
