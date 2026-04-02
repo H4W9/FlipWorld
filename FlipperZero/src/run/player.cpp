@@ -221,7 +221,7 @@ void Player::drawCurrentView(Draw *canvas)
         {
             canvas->fillScreen(COLOR_WHITE);
             canvas->setFont(FONT_SIZE_PRIMARY);
-            canvas->text(Vector(25, 32), "Starting Game...", COLOR_BLACK);
+            canvas->text(25, 32, "Starting Game...", COLOR_BLACK);
             bool gameStarted = flipWorldRun->startGame();
             if (gameStarted && flipWorldRun->getEngine())
             {
@@ -298,7 +298,7 @@ void Player::drawCurrentView(Draw *canvas)
         break;
     default:
         canvas->fillScreen(COLOR_WHITE);
-        canvas->text(Vector(0, 10), "Unknown View", COLOR_BLACK);
+        canvas->text(0, 10, "Unknown View", COLOR_BLACK);
         break;
     }
 }
@@ -362,33 +362,33 @@ void Player::drawJoinLobbyView(Draw *canvas)
     case JoinLobbySuccess:
         canvas->fillScreen(COLOR_WHITE);
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(0, 10), "User info loaded successfully!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Press OK to continue.", COLOR_BLACK);
+        canvas->text(0, 10, "User info loaded successfully!", COLOR_BLACK);
+        canvas->text(0, 20, "Press OK to continue.", COLOR_BLACK);
         break;
     case JoinLobbyCredentialsMissing:
         canvas->fillScreen(COLOR_WHITE);
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(0, 10), "Missing credentials!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Please update your username", COLOR_BLACK);
-        canvas->text(Vector(0, 30), "and password in the settings.", COLOR_BLACK);
+        canvas->text(0, 10, "Missing credentials!", COLOR_BLACK);
+        canvas->text(0, 20, "Please update your username", COLOR_BLACK);
+        canvas->text(0, 30, "and password in the settings.", COLOR_BLACK);
         break;
     case JoinLobbyRequestError:
         canvas->fillScreen(COLOR_WHITE);
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(0, 10), "User info request failed!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Check your network and", COLOR_BLACK);
-        canvas->text(Vector(0, 30), "try again later.", COLOR_BLACK);
+        canvas->text(0, 10, "User info request failed!", COLOR_BLACK);
+        canvas->text(0, 20, "Check your network and", COLOR_BLACK);
+        canvas->text(0, 30, "try again later.", COLOR_BLACK);
         break;
     case JoinLobbyParseError:
         canvas->fillScreen(COLOR_WHITE);
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(0, 10), "Failed to parse user info!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Try again...", COLOR_BLACK);
+        canvas->text(0, 10, "Failed to parse user info!", COLOR_BLACK);
+        canvas->text(0, 20, "Try again...", COLOR_BLACK);
         break;
     default:
         canvas->fillScreen(COLOR_WHITE);
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(0, 10), "Loading user info...", COLOR_BLACK);
+        canvas->text(0, 10, "Loading user info...", COLOR_BLACK);
         break;
     }
 }
@@ -512,13 +512,13 @@ void Player::drawLobbiesView(Draw *canvas)
     case LobbiesSuccess:
         canvas->fillScreen(COLOR_WHITE);
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(5, 10), "Select a Lobby:", COLOR_BLACK);
+        canvas->text(5, 10, "Select a Lobby:", COLOR_BLACK);
 
         if (lobbyCount == 0)
         {
-            canvas->text(Vector(5, 25), "No lobbies available", COLOR_BLACK);
+            canvas->text(5, 25, "No lobbies available", COLOR_BLACK);
             canvas->setFont(FONT_SIZE_SECONDARY);
-            canvas->text(Vector(5, 40), "Press Back to return", COLOR_BLACK);
+            canvas->text(5, 40, "Press Back to return", COLOR_BLACK);
         }
         else
         {
@@ -546,7 +546,7 @@ void Player::drawLobbiesView(Draw *canvas)
                 // Highlight the selected lobby
                 if (lobbyIndex == currentLobbyIndex)
                 {
-                    canvas->fillRectangle(Vector(3, y - 2), Vector(122, itemHeight), COLOR_BLACK);
+                    canvas->fillRectangle(3, y - 2, 122, itemHeight, COLOR_BLACK);
                 }
 
                 // Display lobby name and player count
@@ -562,34 +562,34 @@ void Player::drawLobbiesView(Draw *canvas)
                          lobbies[lobbyIndex].maxPlayers);
 
                 canvas->setFont(FONT_SIZE_SECONDARY);
-                canvas->text(Vector(5, y + 7), lobbyText, lobbyIndex == currentLobbyIndex ? COLOR_WHITE : COLOR_BLACK);
+                canvas->text(5, y + 7, lobbyText, lobbyIndex == currentLobbyIndex ? COLOR_WHITE : COLOR_BLACK);
             }
         }
         break;
     case LobbiesCredentialsMissing:
         canvas->fillScreen(COLOR_WHITE);
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(0, 10), "Missing credentials!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Please update your username", COLOR_BLACK);
-        canvas->text(Vector(0, 30), "and password in the settings.", COLOR_BLACK);
+        canvas->text(0, 10, "Missing credentials!", COLOR_BLACK);
+        canvas->text(0, 20, "Please update your username", COLOR_BLACK);
+        canvas->text(0, 30, "and password in the settings.", COLOR_BLACK);
         break;
     case LobbiesRequestError:
         canvas->fillScreen(COLOR_WHITE);
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(0, 10), "User info request failed!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Check your network and", COLOR_BLACK);
-        canvas->text(Vector(0, 30), "try again later.", COLOR_BLACK);
+        canvas->text(0, 10, "User info request failed!", COLOR_BLACK);
+        canvas->text(0, 20, "Check your network and", COLOR_BLACK);
+        canvas->text(0, 30, "try again later.", COLOR_BLACK);
         break;
     case LobbiesParseError:
         canvas->fillScreen(COLOR_WHITE);
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(0, 10), "Failed to parse user info!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Try again...", COLOR_BLACK);
+        canvas->text(0, 10, "Failed to parse user info!", COLOR_BLACK);
+        canvas->text(0, 20, "Try again...", COLOR_BLACK);
         break;
     default:
         canvas->fillScreen(COLOR_WHITE);
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(0, 10), "Loading user info...", COLOR_BLACK);
+        canvas->text(0, 10, "Loading user info...", COLOR_BLACK);
         break;
     }
 }
@@ -671,26 +671,26 @@ void Player::drawLoginView(Draw *canvas)
         }
         break;
     case LoginSuccess:
-        canvas->text(Vector(0, 10), "Login successful!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Press OK to continue.", COLOR_BLACK);
+        canvas->text(0, 10, "Login successful!", COLOR_BLACK);
+        canvas->text(0, 20, "Press OK to continue.", COLOR_BLACK);
         break;
     case LoginCredentialsMissing:
-        canvas->text(Vector(0, 10), "Missing credentials!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Please set your username", COLOR_BLACK);
-        canvas->text(Vector(0, 30), "and password in the app.", COLOR_BLACK);
+        canvas->text(0, 10, "Missing credentials!", COLOR_BLACK);
+        canvas->text(0, 20, "Please set your username", COLOR_BLACK);
+        canvas->text(0, 30, "and password in the app.", COLOR_BLACK);
         break;
     case LoginRequestError:
-        canvas->text(Vector(0, 10), "Login request failed!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Check your network and", COLOR_BLACK);
-        canvas->text(Vector(0, 30), "try again later.", COLOR_BLACK);
+        canvas->text(0, 10, "Login request failed!", COLOR_BLACK);
+        canvas->text(0, 20, "Check your network and", COLOR_BLACK);
+        canvas->text(0, 30, "try again later.", COLOR_BLACK);
         break;
     case LoginWrongPassword:
-        canvas->text(Vector(0, 10), "Wrong password!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Please check your password", COLOR_BLACK);
-        canvas->text(Vector(0, 30), "and try again.", COLOR_BLACK);
+        canvas->text(0, 10, "Wrong password!", COLOR_BLACK);
+        canvas->text(0, 20, "Please check your password", COLOR_BLACK);
+        canvas->text(0, 30, "and try again.", COLOR_BLACK);
         break;
     default:
-        canvas->text(Vector(0, 10), "Logging in...", COLOR_BLACK);
+        canvas->text(0, 10, "Logging in...", COLOR_BLACK);
         break;
     }
 }
@@ -706,11 +706,11 @@ void Player::drawRainEffect(Draw *canvas)
         uint8_t y = (rainFrame * 2 + seed * 7 + i * 23) & 0x3F;
 
         // Draw star-like droplet
-        canvas->pixel(Vector(x, y), COLOR_BLACK);
-        canvas->pixel(Vector(x - 1, y), COLOR_BLACK);
-        canvas->pixel(Vector(x + 1, y), COLOR_BLACK);
-        canvas->pixel(Vector(x, y - 1), COLOR_BLACK);
-        canvas->pixel(Vector(x, y + 1), COLOR_BLACK);
+        canvas->pixel(x, y, COLOR_BLACK);
+        canvas->pixel(x - 1, y, COLOR_BLACK);
+        canvas->pixel(x + 1, y, COLOR_BLACK);
+        canvas->pixel(x, y - 1, COLOR_BLACK);
+        canvas->pixel(x, y + 1, COLOR_BLACK);
     }
 
     rainFrame += 1;
@@ -790,21 +790,21 @@ void Player::drawRegistrationView(Draw *canvas)
         }
         break;
     case RegistrationSuccess:
-        canvas->text(Vector(0, 10), "Registration successful!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Press OK to continue.", COLOR_BLACK);
+        canvas->text(0, 10, "Registration successful!", COLOR_BLACK);
+        canvas->text(0, 20, "Press OK to continue.", COLOR_BLACK);
         break;
     case RegistrationCredentialsMissing:
-        canvas->text(Vector(0, 10), "Missing credentials!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Please update your username", COLOR_BLACK);
-        canvas->text(Vector(0, 30), "and password in the settings.", COLOR_BLACK);
+        canvas->text(0, 10, "Missing credentials!", COLOR_BLACK);
+        canvas->text(0, 20, "Please update your username", COLOR_BLACK);
+        canvas->text(0, 30, "and password in the settings.", COLOR_BLACK);
         break;
     case RegistrationRequestError:
-        canvas->text(Vector(0, 10), "Registration request failed!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Check your network and", COLOR_BLACK);
-        canvas->text(Vector(0, 30), "try again later.", COLOR_BLACK);
+        canvas->text(0, 10, "Registration request failed!", COLOR_BLACK);
+        canvas->text(0, 20, "Check your network and", COLOR_BLACK);
+        canvas->text(0, 30, "try again later.", COLOR_BLACK);
         break;
     default:
-        canvas->text(Vector(0, 10), "Registering...", COLOR_BLACK);
+        canvas->text(0, 10, "Registering...", COLOR_BLACK);
         break;
     }
 }
@@ -827,54 +827,54 @@ void Player::drawSystemMenuView(Draw *canvas)
         snprintf(strength_str, sizeof(strength_str), "Strength: %.0f", (double)strength);
 
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(7, 16), name);
+        canvas->text(7, 16, name);
         canvas->setFont(FONT_SIZE_SMALL);
-        canvas->text(Vector(7, 30), level_str);
-        canvas->text(Vector(7, 37), health_str);
-        canvas->text(Vector(7, 44), xp_str);
-        canvas->text(Vector(7, 51), strength_str);
+        canvas->text(7, 30, level_str);
+        canvas->text(7, 37, health_str);
+        canvas->text(7, 44, xp_str);
+        canvas->text(7, 51, strength_str);
 
-        canvas->rectangle(Vector(80, 12), Vector(36, 42), COLOR_BLACK);
+        canvas->rectangle(80, 12, 36, 42, COLOR_BLACK);
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(86, 22), "Info");
+        canvas->text(86, 22, "Info");
         canvas->setFont(FONT_SIZE_SECONDARY);
-        canvas->text(Vector(86, 32), "More");
-        canvas->text(Vector(86, 42), "Quit");
+        canvas->text(86, 32, "More");
+        canvas->text(86, 42, "Quit");
         break;
     case MenuIndexAbout:
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(7, 16), VERSION_TAG);
+        canvas->text(7, 16, VERSION_TAG);
         canvas->setFont(FONT_SIZE_SMALL);
-        canvas->text(Vector(7, 25), "Developed by");
-        canvas->text(Vector(7, 32), "JBlanked and Derek");
-        canvas->text(Vector(7, 39), "Jamison. Graphics");
-        canvas->text(Vector(7, 46), "from Pr3!");
-        canvas->text(Vector(7, 60), "www.github.com/jblanked");
+        canvas->text(7, 25, "Developed by");
+        canvas->text(7, 32, "JBlanked and Derek");
+        canvas->text(7, 39, "Jamison. Graphics");
+        canvas->text(7, 46, "from Pr3!");
+        canvas->text(7, 60, "www.github.com/jblanked");
 
         // draw a box around the selected option
-        canvas->rectangle(Vector(80, 12), Vector(36, 42), COLOR_BLACK);
+        canvas->rectangle(80, 12, 36, 42, COLOR_BLACK);
         canvas->setFont(FONT_SIZE_SECONDARY);
-        canvas->text(Vector(86, 22), "Info");
+        canvas->text(86, 22, "Info");
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(86, 32), "More");
+        canvas->text(86, 32, "More");
         canvas->setFont(FONT_SIZE_SECONDARY);
-        canvas->text(Vector(86, 42), "Quit");
+        canvas->text(86, 42, "Quit");
         break;
     case MenuIndexLeaveGame:
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(7, 16), "Leave Game");
+        canvas->text(7, 16, "Leave Game");
         canvas->setFont(FONT_SIZE_SMALL);
-        canvas->text(Vector(7, 32), "Are you sure you");
-        canvas->text(Vector(7, 39), "want to leave");
-        canvas->text(Vector(7, 46), "the game?");
+        canvas->text(7, 32, "Are you sure you");
+        canvas->text(7, 39, "want to leave");
+        canvas->text(7, 46, "the game?");
 
         // draw a box around the selected option
-        canvas->rectangle(Vector(80, 12), Vector(36, 42), COLOR_BLACK);
+        canvas->rectangle(80, 12, 36, 42, COLOR_BLACK);
         canvas->setFont(FONT_SIZE_SECONDARY);
-        canvas->text(Vector(86, 22), "Info");
-        canvas->text(Vector(86, 32), "More");
+        canvas->text(86, 22, "Info");
+        canvas->text(86, 32, "More");
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(86, 42), "Quit");
+        canvas->text(86, 42, "Quit");
         break;
     default:
         break;
@@ -891,17 +891,17 @@ void Player::drawTitleView(Draw *canvas)
     // draw lobby text
     if (currentTitleIndex == 0)
     {
-        canvas->fillRectangle(Vector(36, 16), Vector(56, 16), COLOR_BLACK);
-        canvas->text(Vector(54, 27), "Story", COLOR_WHITE);
-        canvas->fillRectangle(Vector(36, 32), Vector(56, 16), COLOR_WHITE);
-        canvas->text(Vector(54, 42), "PvE", COLOR_BLACK);
+        canvas->fillRectangle(36, 16, 56, 16, COLOR_BLACK);
+        canvas->text(54, 27, "Story", COLOR_WHITE);
+        canvas->fillRectangle(36, 32, 56, 16, COLOR_WHITE);
+        canvas->text(54, 42, "PvE", COLOR_BLACK);
     }
     else if (currentTitleIndex == 1)
     {
-        canvas->fillRectangle(Vector(36, 16), Vector(56, 16), COLOR_WHITE);
-        canvas->text(Vector(54, 27), "Story", COLOR_BLACK);
-        canvas->fillRectangle(Vector(36, 32), Vector(56, 16), COLOR_BLACK);
-        canvas->text(Vector(54, 42), "PvE", COLOR_WHITE);
+        canvas->fillRectangle(36, 16, 56, 16, COLOR_WHITE);
+        canvas->text(54, 27, "Story", COLOR_BLACK);
+        canvas->fillRectangle(36, 32, 56, 16, COLOR_BLACK);
+        canvas->text(54, 42, "PvE", COLOR_WHITE);
     }
 }
 
@@ -920,10 +920,10 @@ void Player::drawUsername(Vector pos, Game *game)
     }
 
     // draw box around the name
-    game->draw->fillRectangle(Vector(screen_x - (strlen(name) * 2) - 1, screen_y - 7), Vector(strlen(name) * 4 + 1, 8), COLOR_WHITE);
+    game->draw->fillRectangle(screen_x - (strlen(name) * 2) - 1, screen_y - 7, strlen(name) * 4 + 1, 8, COLOR_WHITE);
 
     // draw name over player's head
-    game->draw->text(Vector(screen_x - (strlen(name) * 2), screen_y - 2), name, COLOR_BLACK);
+    game->draw->text(screen_x - (strlen(name) * 2), screen_y - 2, name, COLOR_BLACK);
 }
 
 void Player::drawUserInfoView(Draw *canvas)
@@ -953,9 +953,9 @@ void Player::drawUserInfoView(Draw *canvas)
         }
         else
         {
-            canvas->text(Vector(0, 10), "Loading user info...", COLOR_BLACK);
-            canvas->text(Vector(0, 20), "Please wait...", COLOR_BLACK);
-            canvas->text(Vector(0, 30), "It may take up to 15 seconds.", COLOR_BLACK);
+            canvas->text(0, 10, "Loading user info...", COLOR_BLACK);
+            canvas->text(0, 20, "Please wait...", COLOR_BLACK);
+            canvas->text(0, 30, "It may take up to 15 seconds.", COLOR_BLACK);
             FlipWorldApp *app = static_cast<FlipWorldApp *>(flipWorldRun->appContext);
             if (app->getHttpState() == ISSUE)
             {
@@ -985,7 +985,7 @@ void Player::drawUserInfoView(Draw *canvas)
                     return;
                 }
                 canvas->fillScreen(COLOR_WHITE);
-                canvas->text(Vector(0, 10), "User info loaded!", COLOR_BLACK);
+                canvas->text(0, 10, "User info loaded!", COLOR_BLACK);
                 char *username = get_json_value("username", game_stats);
                 char *level = get_json_value("level", game_stats);
                 char *xp = get_json_value("xp", game_stats);
@@ -1018,7 +1018,7 @@ void Player::drawUserInfoView(Draw *canvas)
                 }
 
                 canvas->fillScreen(COLOR_WHITE);
-                canvas->text(Vector(0, 10), "User data found!", COLOR_BLACK);
+                canvas->text(0, 10, "User data found!", COLOR_BLACK);
 
                 // Update player info
                 snprintf(player_name, sizeof(player_name), "%s", username);
@@ -1030,7 +1030,7 @@ void Player::drawUserInfoView(Draw *canvas)
                 this->max_health = atoi(max_health);
 
                 canvas->fillScreen(COLOR_WHITE);
-                canvas->text(Vector(0, 10), "Player info updated!", COLOR_BLACK);
+                canvas->text(0, 10, "Player info updated!", COLOR_BLACK);
 
                 // clean em up gang
                 ::free(username);
@@ -1069,33 +1069,33 @@ void Player::drawUserInfoView(Draw *canvas)
     case UserInfoSuccess:
         canvas->fillScreen(COLOR_WHITE);
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(0, 10), "User info loaded successfully!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Press OK to continue.", COLOR_BLACK);
+        canvas->text(0, 10, "User info loaded successfully!", COLOR_BLACK);
+        canvas->text(0, 20, "Press OK to continue.", COLOR_BLACK);
         break;
     case UserInfoCredentialsMissing:
         canvas->fillScreen(COLOR_WHITE);
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(0, 10), "Missing credentials!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Please update your username", COLOR_BLACK);
-        canvas->text(Vector(0, 30), "and password in the settings.", COLOR_BLACK);
+        canvas->text(0, 10, "Missing credentials!", COLOR_BLACK);
+        canvas->text(0, 20, "Please update your username", COLOR_BLACK);
+        canvas->text(0, 30, "and password in the settings.", COLOR_BLACK);
         break;
     case UserInfoRequestError:
         canvas->fillScreen(COLOR_WHITE);
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(0, 10), "User info request failed!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Check your network and", COLOR_BLACK);
-        canvas->text(Vector(0, 30), "try again later.", COLOR_BLACK);
+        canvas->text(0, 10, "User info request failed!", COLOR_BLACK);
+        canvas->text(0, 20, "Check your network and", COLOR_BLACK);
+        canvas->text(0, 30, "try again later.", COLOR_BLACK);
         break;
     case UserInfoParseError:
         canvas->fillScreen(COLOR_WHITE);
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(0, 10), "Failed to parse user info!", COLOR_BLACK);
-        canvas->text(Vector(0, 20), "Try again...", COLOR_BLACK);
+        canvas->text(0, 10, "Failed to parse user info!", COLOR_BLACK);
+        canvas->text(0, 20, "Try again...", COLOR_BLACK);
         break;
     default:
         canvas->fillScreen(COLOR_WHITE);
         canvas->setFont(FONT_SIZE_PRIMARY);
-        canvas->text(Vector(0, 10), "Loading user info...", COLOR_BLACK);
+        canvas->text(0, 10, "Loading user info...", COLOR_BLACK);
         break;
     }
 }
@@ -1103,7 +1103,7 @@ void Player::drawUserInfoView(Draw *canvas)
 void Player::drawUserStats(Vector pos, Draw *canvas)
 {
     // first draw a white rectangle to make the text more readable
-    canvas->fillRectangle(Vector(pos.x - 1, pos.y - 7), Vector(34, 21), COLOR_WHITE);
+    canvas->fillRectangle(pos.x - 1, pos.y - 7, 34, 21, COLOR_WHITE);
 
     char health_str[32];
     char xp_str[32];
@@ -1119,9 +1119,9 @@ void Player::drawUserStats(Vector pos, Draw *canvas)
 
     // draw items
     canvas->setFont(FONT_SIZE_SMALL);
-    canvas->text(Vector(pos.x, pos.y), health_str, COLOR_BLACK);
-    canvas->text(Vector(pos.x, pos.y + 7), xp_str, COLOR_BLACK);
-    canvas->text(Vector(pos.x, pos.y + 14), level_str, COLOR_BLACK);
+    canvas->text(pos.x, pos.y, health_str, COLOR_BLACK);
+    canvas->text(pos.x, pos.y + 7, xp_str, COLOR_BLACK);
+    canvas->text(pos.x, pos.y + 14, level_str, COLOR_BLACK);
 }
 
 HTTPState Player::getHttpState()
@@ -1518,7 +1518,8 @@ void Player::update(Game *game)
     camera_y = constrain(camera_y, 0, game->size.y - viewport_height);
 
     // Set the new camera position
-    game->pos = Vector(camera_x, camera_y);
+    game->pos.x = camera_x;
+    game->pos.y = camera_y;
 }
 
 void Player::updateStats()

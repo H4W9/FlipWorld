@@ -1199,10 +1199,10 @@ void FlipWorldRun::pveRender(Entity *entity, Draw *canvas, Game *game, void *ctx
     }
 
     // draw box around the name
-    canvas->fillRectangle(Vector(screen_x - (strlen(entity->name) * 2) - 1, screen_y - 7), Vector(strlen(entity->name) * 4 + 1, 8), COLOR_WHITE);
+    canvas->fillRectangle(screen_x - (strlen(entity->name) * 2) - 1, screen_y - 7, strlen(entity->name) * 4 + 1, 8, COLOR_WHITE);
 
     // draw name over player's head
-    canvas->text(Vector(screen_x - (strlen(entity->name) * 2), screen_y - 2), entity->name, COLOR_BLACK);
+    canvas->text(screen_x - (strlen(entity->name) * 2), screen_y - 2, entity->name, COLOR_BLACK);
 }
 
 bool FlipWorldRun::queueWebsocketMessage(const char *message)
@@ -1509,7 +1509,7 @@ bool FlipWorldRun::shouldUpdateEntity(Entity *entity) const
 bool FlipWorldRun::startGame()
 {
     draw->fillScreen(COLOR_WHITE);
-    draw->text(Vector(0, 10), "Initializing game...", COLOR_BLACK);
+    draw->text(0, 10, "Initializing game...", COLOR_BLACK);
 
     if (isGameRunning || engine)
     {
@@ -1537,7 +1537,7 @@ bool FlipWorldRun::startGame()
     }
 
     draw->fillScreen(COLOR_WHITE);
-    draw->text(Vector(0, 10), "Adding levels and player...", COLOR_BLACK);
+    draw->text(0, 10, "Adding levels and player...", COLOR_BLACK);
 
     // add levels and player to the game
     std::unique_ptr<Level> level1 = getLevel(LevelHomeWoods, game.get());
@@ -1559,7 +1559,8 @@ bool FlipWorldRun::startGame()
     game->level_switch(0); // Switch to LevelHomeWoods (index 0)
 
     // set game position to center of player
-    game->pos = Vector(384, 192);
+    game->pos.x = 384;
+    game->pos.y = 192;
     game->old_pos = game->pos;
 
     this->engine = std::make_unique<GameEngine>(game.release(), 60);
@@ -1573,11 +1574,11 @@ bool FlipWorldRun::startGame()
     draw->setFont(FONT_SIZE_SMALL);
     if (isPvEMode)
     {
-        draw->text(Vector(0, 10), "Starting multiplayer game...", COLOR_BLACK);
+        draw->text(0, 10, "Starting multiplayer game...", COLOR_BLACK);
     }
     else
     {
-        draw->text(Vector(0, 10), "Starting single player game...", COLOR_BLACK);
+        draw->text(0, 10, "Starting single player game...", COLOR_BLACK);
     }
 
     isGameRunning = true; // Set the flag to indicate game is running
